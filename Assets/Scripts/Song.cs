@@ -1,21 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Song : MonoBehaviour
+public interface ISongMessageTarget : IEventSystemHandler
 {
+    void Hit(int key);
+}
+
+public class Song : MonoBehaviour, ISongMessageTarget
+{
+    public GameObject[] keys;
+
     float m_timeStart;
     float m_beatInterval = 60.0f / 142;
     float m_timeNextBeat;
 
-    // Start is called before the first frame update
+    public void Hit(int key)
+    {
+        // Calculate precision
+        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(true));
+    }
+
     void Start()
     {
         m_timeStart = Time.time;
         UpdateTimeNextBeat();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Time.time >= m_timeNextBeat)
