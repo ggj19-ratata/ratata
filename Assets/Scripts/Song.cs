@@ -27,6 +27,6 @@ public class Song : MonoBehaviour
 
     void UpdateTimeNextBeat()
     {
-        m_timeNextBeat = m_timeStart + m_beatInterval;
+        m_timeNextBeat = Time.time + m_beatInterval;
     }
 }
