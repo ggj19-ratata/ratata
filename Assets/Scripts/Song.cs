@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public interface ISongMessageTarget : IEventSystemHandler
 {
@@ -24,6 +25,12 @@ public class Song : MonoBehaviour, ISongMessageTarget
     double m_timeNextBeat;
     int m_beats = 0;
 
+	//Ajaskript
+	public Text Endtext;
+	public float EndScreenLength;
+	public float EndScreenTime;
+	//Ajaskript
+
     void Start()
     {
         GetComponent<AudioSource>().Play();
@@ -31,10 +38,30 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
+
+		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
+		//EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
+		//Ajaskript
     }
     
     void Update()
     {
+		//Ajaskript - ENDGAME
+		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
+		Debug.Log(EndScreenTime);
+		if (GetComponent<AudioSource>().time >= EndScreenTime)
+		{
+				//put anything related to endgame HERE
+			Endtext.text = "you win";
+		}
+		else
+		{
+			Endtext.text = "playing";
+			}
+		//Ajaskript
+
+
+
         double time = AudioSettings.dspTime;
         if (time >= m_timeNextBeat)
         {
