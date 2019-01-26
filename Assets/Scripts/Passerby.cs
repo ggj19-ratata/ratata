@@ -7,7 +7,7 @@ public class Passerby : MonoBehaviour
 {
     public List<int> sequence;
 
-    char[] keyChars = { 'Z', 'X', 'C', 'V' };
+    static char[] keyChars = { 'A', 'S', 'K', 'L' };
 
     void Start()
     {
