@@ -25,6 +25,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     int m_resolutions = 0;
     float m_timeNextBeat;
     int m_beats = 0;
+    float timeNextHalfBeat;
+    bool thisBeatNoMistake = true;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
+        timeNextHalfBeat = m_timeStart + m_beatInterval / 2;
     }
     
     void Update()
@@ -42,6 +45,18 @@ public class Song : MonoBehaviour, ISongMessageTarget
             m_timeNextBeat = m_timeNextBeat + m_beatInterval;
             ++m_beats;
             wall.GetComponent<TextMesh>().color = Color.HSVToRGB((m_beats % 2) / 2.0f, 1.0f, 1.0f);
+        }
+        if (Time.time >= timeNextHalfBeat)
+        {
+            if (thisBeatNoMistake)
+            {
+                foreach (GameObject key in keys)
+                {
+                    ExecuteEvents.Execute<IKeyMessageTarget>(key, null, (x, y) => x.HalfBeat(m_beats));
+                }
+            }
+            thisBeatNoMistake = true;
+            timeNextHalfBeat += m_beatInterval;
         }
         if (Time.time >= m_timeNextResolution)
         {
@@ -85,8 +100,9 @@ public class Song : MonoBehaviour, ISongMessageTarget
             {
                 m_beatKeys[beatIndexInSequence] = -2;
                 correct = false;
+                thisBeatNoMistake = false;
             }
         }
-        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct));
+        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, closestBeatIndex));
     }
 }
