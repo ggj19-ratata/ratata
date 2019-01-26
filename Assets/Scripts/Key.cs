@@ -31,6 +31,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
             m_SpriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             audioSourceImmediate.PlayOneShot(successImmediate);
             audioSourceAfter.PlayScheduled(timeNextHalfBeat);
+            GetComponent<Animator>().SetTrigger("Bounce");
         }
         else
         {

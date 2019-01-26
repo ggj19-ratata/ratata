@@ -6,6 +6,8 @@ public class Musician : MonoBehaviour
 {
     public string[] buttons;
     public GameObject song;
+    public int score = 0;
+    public MoneyCounter moneyCounter;
     
     void Update()
     {
@@ -22,5 +24,11 @@ public class Musician : MonoBehaviour
                 ExecuteEvents.Execute<ISongMessageTarget>(song, null, (x, y) => x.Hit(i));
             }
         }
+    }
+
+    public void AddScore(int scoreDiff)
+    {
+        score += scoreDiff;
+        moneyCounter.SetCount(this.score);
     }
 }
