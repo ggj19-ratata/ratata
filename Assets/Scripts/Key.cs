@@ -18,7 +18,6 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     {
         audioSource = GetComponent<AudioSource>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        m_SpriteRenderer.color = Color.blue;
     }
 
     public void Hit(bool correct)
