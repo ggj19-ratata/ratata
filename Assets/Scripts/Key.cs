@@ -1,26 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Key : MonoBehaviour, IHitMessageTarget
+public interface IKeyMessageTarget : IEventSystemHandler
+{
+    void Hit(bool correct);
+}
+
+public class Key : MonoBehaviour, IKeyMessageTarget
 {
     SpriteRenderer m_SpriteRenderer;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        //Fetch the SpriteRenderer from the GameObject
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
-        //Set the GameObject's Color quickly to a set Color (blue)
         m_SpriteRenderer.color = Color.blue;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Hit(bool correct)
     {
-        m_SpriteRenderer.color = Color.blue;
-    }
-
-    void IHitMessageTarget.Hit()
-    {
-        m_SpriteRenderer.color = Color.red;
+        m_SpriteRenderer.color = Random.ColorHSV();
     }
 }

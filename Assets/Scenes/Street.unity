@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &94927013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
+    type: 3}
+  m_PrefabInstance: {fileID: 504551630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,7 +337,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d5384e47ff1f46345b8a3ac840422c3d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6c7eb31beb280b944a02749ddbcf0554, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -429,6 +435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ba293da81f02f47bd0f308f7686034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  keys:
+  - {fileID: 1259426510}
+  - {fileID: 725321420}
+  - {fileID: 421948299}
+  - {fileID: 94927013}
 --- !u!4 &404649042
 Transform:
   m_ObjectHideFlags: 0
@@ -443,6 +454,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &421948299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
+    type: 3}
+  m_PrefabInstance: {fileID: 763021791}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &504551630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
       propertyPath: m_Name
-      value: Keys01 (4)
+      value: KeyV
       objectReference: {fileID: 0}
     - target: {fileID: 5886797839293580189, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
@@ -615,6 +632,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &725321420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
+    type: 3}
+  m_PrefabInstance: {fileID: 967524696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763021791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -625,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
       propertyPath: m_Name
-      value: Keys01 (3)
+      value: KeyC
       objectReference: {fileID: 0}
     - target: {fileID: 5886797839293580189, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
@@ -715,7 +738,7 @@ PrefabInstance:
     - target: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
       propertyPath: m_Name
-      value: Keys01 (2)
+      value: KeyX
       objectReference: {fileID: 0}
     - target: {fileID: 5886797839293580189, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
@@ -795,6 +818,12 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
+--- !u!1 &1259426510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
+    type: 3}
+  m_PrefabInstance: {fileID: 5886797839265283280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1308169808
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +849,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308169808}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1308169810
 Camera:
   m_ObjectHideFlags: 0
@@ -887,7 +916,7 @@ PrefabInstance:
     - target: {fileID: 5302461187547829257, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
       propertyPath: m_Name
-      value: Rat
+      value: Musician
       objectReference: {fileID: 0}
     - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
@@ -946,18 +975,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
-      propertyPath: button0
-      value: Instrument0
+      propertyPath: buttons.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
-      propertyPath: button1
-      value: Instrument1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: key0
+      propertyPath: song
       value: 
+      objectReference: {fileID: 404649039}
+    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: buttons.Array.data[0]
+      value: ButtonZ
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: buttons.Array.data[1]
+      value: ButtonX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: buttons.Array.data[2]
+      value: ButtonC
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: buttons.Array.data[3]
+      value: ButtonV
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 006001e5841a96f478be9c07dcd8a486, type: 3}
@@ -971,7 +1015,7 @@ PrefabInstance:
     - target: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
       propertyPath: m_Name
-      value: Keys01
+      value: KeyZ
       objectReference: {fileID: 0}
     - target: {fileID: 5886797839293580189, guid: b7f74cfab509bff4baf7a7738b4ff709,
         type: 3}
