@@ -27,6 +27,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     void Start()
     {
+        GetComponent<AudioSource>().Play();
         m_timeStart = Time.time;
         UpdateTimeNextBeat();
     }
