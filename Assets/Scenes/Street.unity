@@ -318,7 +318,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6c7eb31beb280b944a02749ddbcf0554, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2db4667fbfdc81a4a888aaf094022ff0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -422,7 +422,7 @@ MonoBehaviour:
   - {fileID: 421948299}
   - {fileID: 94927013}
   beatCounter: {fileID: 190805305}
-  clipBeats: 64
+  clipBeats: 544
   m_imprecisionTolerance: 0.25
   Endtext: {fileID: 1037234011}
   EndScreenLength: 0
