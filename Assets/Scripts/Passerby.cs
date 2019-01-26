@@ -11,14 +11,15 @@ public interface IPasserbyMessageTarget : IEventSystemHandler
 
 public class Passerby : MonoBehaviour, IPasserbyMessageTarget
 {
-    public List<int> sequence;
+    public GameObject banner;
     public Musician musician;
+    public List<int> sequence;
 
     static char[] keyChars = { 'A', 'S', 'K', 'L' };
 
     void Start()
     {
-        GetComponent<TextMesh>().text = String.Join("", sequence.Select(i => keyChars[i]));
+        banner.GetComponent<TextMesh>().text = String.Join("", sequence.Select(i => keyChars[i]));
     }
 
     public void TrySequence(List<int> playedSequence)
