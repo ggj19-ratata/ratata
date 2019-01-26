@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,7 +19,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     double m_timeStart;
     double m_beatInterval;
     double m_timeNextResolution;
-    int[] m_beatKeys = { -1, -1, -1, -1 };
+    List<int> m_beatKeys = new List<int>(new int[] { -1, -1, -1, -1 });
     int m_resolutions = 0;
     double m_timeNextBeat;
     int m_beats = 0;
@@ -28,7 +29,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         GetComponent<AudioSource>().Play();
         m_timeStart = AudioSettings.dspTime;
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
-        m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
+        m_timeNextResolution = m_timeStart + (m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
     }
     
@@ -44,13 +45,14 @@ public class Song : MonoBehaviour, ISongMessageTarget
         if (time >= m_timeNextResolution)
         {
             ++m_resolutions;
-            m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
+            m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
             Debug.Log(string.Format("{0} {1} {2} {3}", m_beatKeys[0], m_beatKeys[1], m_beatKeys[2], m_beatKeys[3]));
 
             foreach (GameObject passerby in GameObject.FindGameObjectsWithTag("Passerby"))
             {
-                int[] seq = passerby.GetComponent<Passerby>().sequence.ToArray();
-                if (seq == m_beatKeys)
+                List<int> seq = passerby.GetComponent<Passerby>().sequence;
+                Debug.Log(string.Format("passerby: {0} {1} {2} {3}", seq[0], seq[1], seq[2], seq[3]));
+                if (seq.SequenceEqual(m_beatKeys))
                 {
                     Debug.Log("Correct sequence!");
                 }
@@ -74,7 +76,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         bool correct = Math.Abs(imprecisionRatio) <= m_imprecisionTolerance;
         if (correct)
         {
-            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Length;
+            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Count;
             if (m_beatKeys[beatIndexInSequence] == -1)
             {
                 m_beatKeys[beatIndexInSequence] = key;
