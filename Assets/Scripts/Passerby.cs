@@ -42,11 +42,8 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
 
     void UpdateSequence()
     {
-        Debug.Log(String.Join(", ", sequence));
-        Debug.Log(active);
         if (active)
         {
-            Debug.Log(String.Join("", sequence.Select(i => keyChars[i])));
             banner.GetComponent<TextMesh>().text = String.Join("", sequence.Select(i => keyChars[i]));
         }
     }
