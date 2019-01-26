@@ -13,7 +13,7 @@ public interface ISongMessageTarget : IEventSystemHandler
 public class Song : MonoBehaviour, ISongMessageTarget
 {
     public GameObject[] keys;
-    public GameObject wall;
+    public GameObject beatCounter;
     public int clipBeats;
     public double m_imprecisionTolerance = 0.25;
 
@@ -67,7 +67,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         {
             m_timeNextBeat = m_timeNextBeat + m_beatInterval;
             ++m_beats;
-            wall.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
+            beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
         }
         if (time >= m_timeNextResolution)
         {

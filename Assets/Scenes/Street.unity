@@ -421,7 +421,7 @@ MonoBehaviour:
   - {fileID: 725321420}
   - {fileID: 421948299}
   - {fileID: 94927013}
-  wall: {fileID: 190805305}
+  beatCounter: {fileID: 190805305}
   clipBeats: 64
   m_imprecisionTolerance: 0.25
   Endtext: {fileID: 1037234011}
