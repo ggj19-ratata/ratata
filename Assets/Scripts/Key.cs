@@ -28,7 +28,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     {
         if (correct)
         {
-            m_SpriteRenderer.color = Random.ColorHSV();
+            m_SpriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             audioSourceImmediate.PlayOneShot(successImmediate);
             audioSourceAfter.PlayScheduled(timeNextHalfBeat);
         }
