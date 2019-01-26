@@ -18,7 +18,12 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public void Hit(int key)
     {
         // Calculate precision
-        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(true));
+        float timeSinceStart = Time.time - m_timeStart;
+        float timeFromClosestBeat = (timeSinceStart + m_beatInterval/2) % m_beatInterval - m_beatInterval/2;
+        float imprecisionRatio = timeFromClosestBeat*2 / m_beatInterval;
+        Debug.Log(imprecisionRatio);
+        bool correct = Mathf.Abs(imprecisionRatio) <= 0.25;
+        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct));
     }
 
     void Start()
@@ -31,7 +36,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     {
         if (Time.time >= m_timeNextBeat)
         {
-            Debug.Log("beat");
+            //Debug.Log("beat");
             ++beatIndex;
             UpdateTimeNextBeat();
         }
