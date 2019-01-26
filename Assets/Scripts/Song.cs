@@ -7,6 +7,10 @@ public interface ISongMessageTarget : IEventSystemHandler
     void Hit(int key);
 }
 
+/*
+ * TODO: Use AudioSettings.dspTime.
+ * See https://christianfloisand.wordpress.com/2014/01/23/beat-synchronization-in-unity/
+ */
 public class Song : MonoBehaviour, ISongMessageTarget
 {
     public GameObject[] keys;
