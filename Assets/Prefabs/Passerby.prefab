@@ -110,6 +110,7 @@ MonoBehaviour:
   banner: {fileID: 2223186109909994421}
   musician: {fileID: 0}
   sequence: 00000000010000000200000003000000
+  active: 1
 --- !u!82 &2223186109508846772
 AudioSource:
   m_ObjectHideFlags: 0

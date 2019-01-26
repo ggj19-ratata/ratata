@@ -33,7 +33,7 @@ public class PasserbySpawner : MonoBehaviour
             Vector3 pos = transform.position + new Vector3(planarPos.x, 1, planarPos.y);
             Passerby passerby = Instantiate(passerbyPrefab, pos, Quaternion.identity);
             passerby.musician = musician;
-            passerby.sequence = new List<int>(sequences[Math.Min((int)UnityEngine.Random.Range(0, sequences.Length), sequences.Length - 1)]);
+            passerby.SetSequence(new List<int>(sequences[Math.Min((int)UnityEngine.Random.Range(0, sequences.Length), sequences.Length - 1)]));
         }
     }
 }
