@@ -22,8 +22,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
     int m_resolutions = 0;
     double m_timeNextBeat;
     int m_beats = 0;
-    double timeNextHalfBeat;
-    bool thisBeatNoMistake = true;
 
     void Start()
     {
@@ -32,7 +30,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
-        timeNextHalfBeat = m_timeStart + m_beatInterval / 2;
     }
     
     void Update()
@@ -43,18 +40,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
             m_timeNextBeat = m_timeNextBeat + m_beatInterval;
             ++m_beats;
             wall.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
-        }
-        if (time >= timeNextHalfBeat)
-        {
-            if (thisBeatNoMistake)
-            {
-                foreach (GameObject key in keys)
-                {
-                    //ExecuteEvents.Execute<IKeyMessageTarget>(key, null, (x, y) => x.HalfBeat(m_beats));
-                }
-            }
-            thisBeatNoMistake = true;
-            timeNextHalfBeat += m_beatInterval;
         }
         if (time >= m_timeNextResolution)
         {
@@ -98,7 +83,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
             {
                 m_beatKeys[beatIndexInSequence] = -2;
                 correct = false;
-                thisBeatNoMistake = false;
             }
         }
         double timeNextHalfBeat = m_timeStart + (closestBeatIndex + 0.5) * m_beatInterval;
