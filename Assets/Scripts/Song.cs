@@ -26,31 +26,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
     float m_timeNextBeat;
     int m_beats = 0;
 
-    public void Hit(int key)
-    {
-        float timeSinceStart = Time.time - m_timeStart;
-        int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
-        float closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
-        float timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
-        float imprecisionRatio = timeFromClosestBeat / m_beatInterval;
-        Debug.Log(imprecisionRatio);
-        bool correct = Mathf.Abs(imprecisionRatio) <= m_imprecisionTolerance;
-        if (correct)
-        {
-            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Length;
-            if (m_beatKeys[beatIndexInSequence] == -1)
-            {
-                m_beatKeys[beatIndexInSequence] = key;
-            }
-            else
-            {
-                m_beatKeys[beatIndexInSequence] = -2;
-                correct = false;
-            }
-        }
-        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct));
-    }
-
     void Start()
     {
         GetComponent<AudioSource>().Play();
@@ -88,5 +63,30 @@ public class Song : MonoBehaviour, ISongMessageTarget
             m_beatKeys[2] = -1;
             m_beatKeys[3] = -1;
         }
+    }
+
+    public void Hit(int key)
+    {
+        float timeSinceStart = Time.time - m_timeStart;
+        int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
+        float closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
+        float timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
+        float imprecisionRatio = timeFromClosestBeat / m_beatInterval;
+        Debug.Log(imprecisionRatio);
+        bool correct = Mathf.Abs(imprecisionRatio) <= m_imprecisionTolerance;
+        if (correct)
+        {
+            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Length;
+            if (m_beatKeys[beatIndexInSequence] == -1)
+            {
+                m_beatKeys[beatIndexInSequence] = key;
+            }
+            else
+            {
+                m_beatKeys[beatIndexInSequence] = -2;
+                correct = false;
+            }
+        }
+        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct));
     }
 }
