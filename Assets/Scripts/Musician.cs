@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System;
 
-public class Rat : MonoBehaviour
+public class Musician : MonoBehaviour
 {
     public string[] buttons;
     public GameObject song;

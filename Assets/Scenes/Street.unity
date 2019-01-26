@@ -916,7 +916,7 @@ PrefabInstance:
     - target: {fileID: 5302461187547829257, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
       propertyPath: m_Name
-      value: Rat
+      value: Musician
       objectReference: {fileID: 0}
     - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
