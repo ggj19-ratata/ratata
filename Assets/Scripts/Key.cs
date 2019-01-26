@@ -8,6 +8,9 @@ public interface IKeyMessageTarget : IEventSystemHandler
 
 public class Key : MonoBehaviour, IKeyMessageTarget
 {
+    public AudioClip success;
+    public AudioClip failure;
+
     SpriteRenderer m_SpriteRenderer;
     
     void Start()
@@ -18,6 +21,16 @@ public class Key : MonoBehaviour, IKeyMessageTarget
 
     public void Hit(bool correct)
     {
-        m_SpriteRenderer.color = Random.ColorHSV();
+        AudioSource audio = GetComponent<AudioSource>();
+        if (correct)
+        {
+            audio.clip = success;
+            m_SpriteRenderer.color = Random.ColorHSV();
+        }
+        else
+        {
+            audio.clip = failure;
+        }
+        audio.Play();
     }
 }

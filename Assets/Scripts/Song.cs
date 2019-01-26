@@ -13,6 +13,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     float m_timeStart;
     float m_beatInterval = 60.0f / 142;
     float m_timeNextBeat;
+    int beatIndex = 0;
 
     public void Hit(int key)
     {
@@ -31,6 +32,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         if (Time.time >= m_timeNextBeat)
         {
             Debug.Log("beat");
+            ++beatIndex;
             UpdateTimeNextBeat();
         }
     }
