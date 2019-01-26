@@ -30,6 +30,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public Text Endtext;
 	public float EndScreenLength;
 	public float EndScreenTime;
+	public GameObject panel;
 	//Ajaskript
 
     void Start()
@@ -53,11 +54,12 @@ public class Song : MonoBehaviour, ISongMessageTarget
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
 		{
 				//put anything related to endgame HERE
-			Endtext.text = "you win";
+			panel.SetActive(true);
+			Endtext.text = "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW THRASH CAN HOME! \nWELL DONE!";
 		}
 		else
 		{
-			Endtext.text = "playing";
+			Endtext.text = "";
 			}
 		//Ajaskript
 
