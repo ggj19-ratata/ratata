@@ -17,7 +17,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     public void Hit(int key)
     {
-        // Calculate precision
         float timeSinceStart = Time.time - m_timeStart;
         float timeFromClosestBeat = (timeSinceStart + m_beatInterval/2) % m_beatInterval - m_beatInterval/2;
         float imprecisionRatio = timeFromClosestBeat*2 / m_beatInterval;

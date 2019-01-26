@@ -9,6 +9,7 @@ public class Musician : MonoBehaviour
     
     void Update()
     {
+        // TODO: Decrease lag. Consider using FixedUpdate.
         for (int i = 0; i < buttons.Length; i++)
         {
             string button = buttons[i];
