@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -42,29 +41,26 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_timeNextBeat = m_timeStart + m_beatInterval;
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
-		//EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
+		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
 		//Ajaskript
     }
     
     void Update()
     {
 		//Ajaskript - ENDGAME
-		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
-		Debug.Log(EndScreenTime);
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
 		{
-				//put anything related to endgame HERE
+			//put anything related to endgame HERE
 			panel.SetActive(true);
 			Endtext.text = "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW THRASH CAN HOME! \nWELL DONE!";
 		}
 		else
 		{
 			Endtext.text = "";
-			}
+		}
+
 		//Ajaskript
-
-
-
+        
         double time = AudioSettings.dspTime;
         if (time >= m_timeNextBeat)
         {
