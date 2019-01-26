@@ -67,7 +67,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
         double closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
         double timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
         double imprecisionRatio = timeFromClosestBeat / m_beatInterval;
-        Debug.Log(imprecisionRatio);
         bool correct = Math.Abs(imprecisionRatio) <= m_imprecisionTolerance;
         if (correct)
         {
