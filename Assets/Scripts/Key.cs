@@ -12,25 +12,25 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     public AudioClip failure;
 
     SpriteRenderer m_SpriteRenderer;
+    AudioSource audioSource;
     
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_SpriteRenderer.color = Color.blue;
     }
 
     public void Hit(bool correct)
     {
-        AudioSource audio = GetComponent<AudioSource>();
         if (correct)
         {
-            audio.clip = success;
             m_SpriteRenderer.color = Random.ColorHSV();
+            audioSource.PlayOneShot(success);
         }
         else
         {
-            audio.clip = failure;
+            audioSource.PlayOneShot(failure);
         }
-        audio.Play();
     }
 }
