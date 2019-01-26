@@ -11,9 +11,10 @@ public class Song : MonoBehaviour, ISongMessageTarget
 {
     public GameObject[] keys;
     public GameObject wall;
+    public int clipBeats;
 
     float m_timeStart;
-    float m_beatInterval = 60.0f / 142;
+    float m_beatInterval;
     float m_imprecisionTolerance = 0.25f;
     float m_timeNextResolution;
     int[] m_beatKeys = { -1, -1, -1, -1 };
@@ -49,6 +50,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     {
         GetComponent<AudioSource>().Play();
         m_timeStart = Time.time;
+        m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
     }

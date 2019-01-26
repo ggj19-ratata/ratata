@@ -447,6 +447,7 @@ MonoBehaviour:
   - {fileID: 421948299}
   - {fileID: 94927013}
   wall: {fileID: 358986384}
+  clipBeats: 64
 --- !u!4 &404649042
 Transform:
   m_ObjectHideFlags: 0
