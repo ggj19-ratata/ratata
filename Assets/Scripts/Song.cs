@@ -66,7 +66,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         double time = AudioSettings.dspTime;
         if (time >= m_timeNextBeat)
         {
-            m_timeNextBeat = m_timeNextBeat + m_beatInterval;
+            m_timeNextBeat += m_beatInterval;
             ++m_beats;
             beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
         }
