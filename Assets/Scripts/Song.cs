@@ -10,6 +10,7 @@ public interface ISongMessageTarget : IEventSystemHandler
 public class Song : MonoBehaviour, ISongMessageTarget
 {
     public GameObject[] keys;
+    public GameObject wall;
 
     float m_timeStart;
     float m_beatInterval = 60.0f / 142;
@@ -17,6 +18,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     float m_timeNextResolution;
     int[] m_beatKeys = { -1, -1, -1, -1 };
     int m_resolutions = 0;
+    float m_timeNextBeat;
 
     public void Hit(int key)
     {
@@ -48,10 +50,16 @@ public class Song : MonoBehaviour, ISongMessageTarget
         GetComponent<AudioSource>().Play();
         m_timeStart = Time.time;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
+        m_timeNextBeat = m_timeStart + m_beatInterval;
     }
     
     void Update()
     {
+        if (Time.time >= m_timeNextBeat)
+        {
+            wall.GetComponent<TextMesh>().color = Random.ColorHSV();
+            m_timeNextBeat = m_timeNextBeat + m_beatInterval;
+        }
         if (Time.time >= m_timeNextResolution)
         {
             ++m_resolutions;
