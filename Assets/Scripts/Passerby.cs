@@ -12,6 +12,7 @@ public interface IPasserbyMessageTarget : IEventSystemHandler
 public class Passerby : MonoBehaviour, IPasserbyMessageTarget
 {
     public List<int> sequence;
+    public Musician musician;
 
     static char[] keyChars = { 'A', 'S', 'K', 'L' };
 
@@ -25,6 +26,7 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
         if (playedSequence.SequenceEqual(sequence))
         {
             GetComponent<AudioSource>().Play();
+            musician.AddScore(1);
         }
     }
 }
