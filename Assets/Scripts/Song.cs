@@ -46,7 +46,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         {
             m_timeNextBeat = m_timeNextBeat + m_beatInterval;
             ++m_beats;
-            wall.GetComponent<TextMesh>().color = Color.HSVToRGB((m_beats % 2) / 2.0f, 1.0f, 1.0f);
+            wall.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
         }
         if (time >= timeNextHalfBeat)
         {
