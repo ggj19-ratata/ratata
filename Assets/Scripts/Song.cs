@@ -12,16 +12,33 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     float m_timeStart;
     float m_beatInterval = 60.0f / 142;
-    float m_timeNextBeat;
-    int beatIndex = 0;
+    float m_imprecisionTolerance = 0.25f;
+    float m_timeNextResolution;
+    int[] m_beatKeys = { -1, -1, -1, -1 };
+    int m_resolutions = 0;
 
     public void Hit(int key)
     {
         float timeSinceStart = Time.time - m_timeStart;
-        float timeFromClosestBeat = (timeSinceStart + m_beatInterval/2) % m_beatInterval - m_beatInterval/2;
-        float imprecisionRatio = timeFromClosestBeat*2 / m_beatInterval;
+        int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
+        float closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
+        float timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
+        float imprecisionRatio = timeFromClosestBeat / m_beatInterval;
         Debug.Log(imprecisionRatio);
-        bool correct = Mathf.Abs(imprecisionRatio) <= 0.25;
+        bool correct = Mathf.Abs(imprecisionRatio) <= m_imprecisionTolerance;
+        if (correct)
+        {
+            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Length;
+            if (m_beatKeys[beatIndexInSequence] == -1)
+            {
+                m_beatKeys[beatIndexInSequence] = key;
+            }
+            else
+            {
+                m_beatKeys[beatIndexInSequence] = -2;
+                correct = false;
+            }
+        }
         ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct));
     }
 
@@ -29,21 +46,20 @@ public class Song : MonoBehaviour, ISongMessageTarget
     {
         GetComponent<AudioSource>().Play();
         m_timeStart = Time.time;
-        UpdateTimeNextBeat();
+        m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
     }
     
     void Update()
     {
-        if (Time.time >= m_timeNextBeat)
+        if (Time.time >= m_timeNextResolution)
         {
-            //Debug.Log("beat");
-            ++beatIndex;
-            UpdateTimeNextBeat();
+            ++m_resolutions;
+            m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
+            Debug.Log(string.Format("{0} {1} {2} {3}", m_beatKeys[0], m_beatKeys[1], m_beatKeys[2], m_beatKeys[3]));
+            m_beatKeys[0] = -1;
+            m_beatKeys[1] = -1;
+            m_beatKeys[2] = -1;
+            m_beatKeys[3] = -1;
         }
-    }
-
-    void UpdateTimeNextBeat()
-    {
-        m_timeNextBeat = Time.time + m_beatInterval;
     }
 }
