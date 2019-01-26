@@ -418,6 +418,7 @@ MonoBehaviour:
   - {fileID: 94927013}
   wall: {fileID: 358986384}
   clipBeats: 64
+  m_imprecisionTolerance: 0.25
 --- !u!4 &404649042
 Transform:
   m_ObjectHideFlags: 0

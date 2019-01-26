@@ -16,10 +16,10 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public GameObject[] keys;
     public GameObject wall;
     public int clipBeats;
+    public float m_imprecisionTolerance = 0.25f;
 
     float m_timeStart;
     float m_beatInterval;
-    float m_imprecisionTolerance = 0.25f;
     float m_timeNextResolution;
     int[] m_beatKeys = { -1, -1, -1, -1 };
     int m_resolutions = 0;
