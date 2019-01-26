@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public interface ISongMessageTarget : IEventSystemHandler
@@ -56,6 +57,16 @@ public class Song : MonoBehaviour, ISongMessageTarget
             ++m_resolutions;
             m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
             Debug.Log(string.Format("{0} {1} {2} {3}", m_beatKeys[0], m_beatKeys[1], m_beatKeys[2], m_beatKeys[3]));
+
+            foreach (GameObject passerby in GameObject.FindGameObjectsWithTag("Passerby"))
+            {
+                int[] seq = passerby.GetComponent<Passerby>().sequence.ToArray();
+                if (seq == m_beatKeys)
+                {
+                    Debug.Log("Correct sequence!");
+                }
+            }
+
             m_beatKeys[0] = -1;
             m_beatKeys[1] = -1;
             m_beatKeys[2] = -1;
