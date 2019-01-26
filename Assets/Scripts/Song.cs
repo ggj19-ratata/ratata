@@ -16,6 +16,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public GameObject beatCounter;
     public int clipBeats;
     public double m_imprecisionTolerance = 0.25;
+    public double playbackDelay = 1.0; // Allows pre-loading the clip for better synchronization
 
     double m_timeStart;
     double m_beatInterval;
@@ -33,8 +34,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     void Start()
     {
-        GetComponent<AudioSource>().Play();
-        m_timeStart = AudioSettings.dspTime;
+        m_timeStart = AudioSettings.dspTime + playbackDelay;
+        GetComponent<AudioSource>().PlayScheduled(m_timeStart);
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
