@@ -3,8 +3,7 @@ using UnityEngine.EventSystems;
 
 public interface IKeyMessageTarget : IEventSystemHandler
 {
-    void Hit(bool correct, int beatIndex);
-    void HalfBeat(int beatIndex);
+    void Hit(bool correct, double timeNextHalfBeat);
 }
 
 public class Key : MonoBehaviour, IKeyMessageTarget
@@ -14,35 +13,28 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     public AudioClip failure;
 
     SpriteRenderer m_SpriteRenderer;
-    AudioSource audioSource;
-    int lastBeatIndex = -1;
+    AudioSource audioSourceImmediate;
+    AudioSource audioSourceAfter;
     
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSourceImmediate = gameObject.AddComponent<AudioSource>();
+        audioSourceAfter = gameObject.AddComponent<AudioSource>();
+        audioSourceAfter.clip = successAfter;
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void Hit(bool correct, int beatIndex)
+    public void Hit(bool correct, double timeNextHalfBeat)
     {
         if (correct)
         {
             m_SpriteRenderer.color = Random.ColorHSV();
-            audioSource.PlayOneShot(successImmediate);
-            lastBeatIndex = beatIndex;
+            audioSourceImmediate.PlayOneShot(successImmediate);
+            audioSourceAfter.PlayScheduled(timeNextHalfBeat);
         }
         else
         {
-            audioSource.PlayOneShot(failure);
-            lastBeatIndex = -1;
-        }
-    }
-
-    public void HalfBeat(int beatIndex)
-    {
-        if (beatIndex == lastBeatIndex)
-        {
-            audioSource.PlayOneShot(successAfter);
+            audioSourceImmediate.PlayOneShot(failure);
         }
     }
 }
