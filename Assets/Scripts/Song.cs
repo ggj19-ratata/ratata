@@ -50,12 +50,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
             foreach (GameObject passerby in GameObject.FindGameObjectsWithTag("Passerby"))
             {
-                List<int> seq = passerby.GetComponent<Passerby>().sequence;
-                Debug.Log(string.Format("passerby: {0} {1} {2} {3}", seq[0], seq[1], seq[2], seq[3]));
-                if (seq.SequenceEqual(m_beatKeys))
-                {
-                    Debug.Log("Correct sequence!");
-                }
+                ExecuteEvents.Execute<IPasserbyMessageTarget>(passerby, null, (x, y) => x.TrySequence(m_beatKeys));
             }
 
             m_beatKeys[0] = -1;
