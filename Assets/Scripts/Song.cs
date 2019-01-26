@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,22 +17,22 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public GameObject[] keys;
     public GameObject wall;
     public int clipBeats;
-    public float m_imprecisionTolerance = 0.25f;
+    public double m_imprecisionTolerance = 0.25;
 
-    float m_timeStart;
-    float m_beatInterval;
-    float m_timeNextResolution;
+    double m_timeStart;
+    double m_beatInterval;
+    double m_timeNextResolution;
     int[] m_beatKeys = { -1, -1, -1, -1 };
     int m_resolutions = 0;
-    float m_timeNextBeat;
+    double m_timeNextBeat;
     int m_beats = 0;
-    float timeNextHalfBeat;
+    double timeNextHalfBeat;
     bool thisBeatNoMistake = true;
 
     void Start()
     {
         GetComponent<AudioSource>().Play();
-        m_timeStart = Time.time;
+        m_timeStart = AudioSettings.dspTime;
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
@@ -40,25 +41,26 @@ public class Song : MonoBehaviour, ISongMessageTarget
     
     void Update()
     {
-        if (Time.time >= m_timeNextBeat)
+        double time = AudioSettings.dspTime;
+        if (time >= m_timeNextBeat)
         {
             m_timeNextBeat = m_timeNextBeat + m_beatInterval;
             ++m_beats;
             wall.GetComponent<TextMesh>().color = Color.HSVToRGB((m_beats % 2) / 2.0f, 1.0f, 1.0f);
         }
-        if (Time.time >= timeNextHalfBeat)
+        if (time >= timeNextHalfBeat)
         {
             if (thisBeatNoMistake)
             {
                 foreach (GameObject key in keys)
                 {
-                    ExecuteEvents.Execute<IKeyMessageTarget>(key, null, (x, y) => x.HalfBeat(m_beats));
+                    //ExecuteEvents.Execute<IKeyMessageTarget>(key, null, (x, y) => x.HalfBeat(m_beats));
                 }
             }
             thisBeatNoMistake = true;
             timeNextHalfBeat += m_beatInterval;
         }
-        if (Time.time >= m_timeNextResolution)
+        if (time >= m_timeNextResolution)
         {
             ++m_resolutions;
             m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Length + m_imprecisionTolerance) * m_beatInterval;
@@ -82,13 +84,13 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     public void Hit(int key)
     {
-        float timeSinceStart = Time.time - m_timeStart;
+        double timeSinceStart = AudioSettings.dspTime - m_timeStart;
         int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
-        float closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
-        float timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
-        float imprecisionRatio = timeFromClosestBeat / m_beatInterval;
+        double closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
+        double timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
+        double imprecisionRatio = timeFromClosestBeat / m_beatInterval;
         Debug.Log(imprecisionRatio);
-        bool correct = Mathf.Abs(imprecisionRatio) <= m_imprecisionTolerance;
+        bool correct = Math.Abs(imprecisionRatio) <= m_imprecisionTolerance;
         if (correct)
         {
             int beatIndexInSequence = closestBeatIndex % m_beatKeys.Length;
