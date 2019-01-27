@@ -29,7 +29,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public int introBeats = 0;
     public AudioClip songMain;
     public AudioClip songExtra;
-    public double halfBeatDistance = 0.25;
 
     double m_timeStart;
     double m_beatInterval;
@@ -60,9 +59,9 @@ public class Song : MonoBehaviour, ISongMessageTarget
         audioSourceExtra = gameObject.AddComponent<AudioSource>();
         audioSourceExtra.clip = songExtra;
         audioSourceExtra.PlayScheduled(m_timeStart);
-        audioSourceExtra.volume = 0f;
+        audioSourceExtra.volume = 1f;
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
-        m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
+        m_timeNextResolution = m_timeStart + (sequenceLength - 1 + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
         keysObject.SetEnabled(introBeats == 0);
         timeNextEnable = m_timeStart + (introBeats - 0.5) * m_beatInterval;
@@ -108,7 +107,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
         {
             keysObject.SetEnabled(false);
             timeNextDisable += sequenceLength * 2 * m_beatInterval;
-            audioSourceExtra.volume = 0f;
         }
         if (time >= m_timeNextBeat)
         {
@@ -119,9 +117,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
         if (time >= m_timeNextResolution)
         {
             List<int> sequence = new List<int>();
-            for (int i = 0; i < sequenceLength; ++i)
+            for (int beatIndex = m_beats - sequenceLength + 1; beatIndex < m_beats + 1; ++beatIndex)
             {
-                int beatIndex = m_beats - sequenceLength + i;
                 int seqElem = -1;
                 if (beatResults.ContainsKey(beatIndex))
                 {
@@ -140,13 +137,24 @@ public class Song : MonoBehaviour, ISongMessageTarget
                 sequence.Add(seqElem);
             }
             Debug.Log(String.Join(" ", sequence));
+            bool anySuccess = false;
             foreach (GameObject passerby in GameObject.FindGameObjectsWithTag("Passerby"))
             {
-                ExecuteEvents.Execute<IPasserbyMessageTarget>(passerby, null, (x, y) => x.TrySequence(sequence));
+                bool success = false;
+                ExecuteEvents.Execute<IPasserbyMessageTarget>(passerby, null, (x, y) => x.TrySequence(sequence, out success));
+                anySuccess |= success;
+            }
+            if (anySuccess)
+            {
+                audioSourceExtra.volume = 1f;
+            }
+            else
+            {
+                audioSourceExtra.volume = 0f;
             }
 
             ++m_resolutions;
-            m_timeNextResolution = m_timeStart + ((m_resolutions+1) * sequenceLength + m_imprecisionTolerance) * m_beatInterval;
+            m_timeNextResolution = m_timeStart + ((m_resolutions+1) * sequenceLength - 1 + m_imprecisionTolerance) * m_beatInterval;
         }
     }
 
@@ -170,13 +178,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
         {
             beatResults[closestBeatIndex].misses.Add(key);
         }
-        double timeNextHalfBeat = m_timeStart + (closestBeatIndex + halfBeatDistance) * m_beatInterval;
+        double beatTime = m_timeStart + closestBeatIndex * m_beatInterval;
         // TODO: Don't declare the beat correct if it coincides with another beat.
-        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, timeNextHalfBeat));
-    }
-
-    public void RegisterSuccess()
-    {
-        audioSourceExtra.volume = 1f;
+        ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, beatTime, m_beatInterval));
     }
 }

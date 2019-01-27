@@ -551,7 +551,6 @@ MonoBehaviour:
   introBeats: 32
   songMain: {fileID: 8300000, guid: 2db4667fbfdc81a4a888aaf094022ff0, type: 3}
   songExtra: {fileID: 8300000, guid: 4f14622b1b24b2040b2cd786c9809edf, type: 3}
-  halfBeatDistance: 0.25
   Endtext: {fileID: 1037234011}
   EndScreenLength: 25
   EndScreenTime: 0
@@ -1228,7 +1227,6 @@ MonoBehaviour:
   radius: 4
   intervalMin: 1
   intervalMax: 4
-  song: {fileID: 404649041}
 --- !u!1 &725321420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
@@ -1487,6 +1485,11 @@ PrefabInstance:
       propertyPath: song
       value: 
       objectReference: {fileID: 404649041}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: afterInterval
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &763021792 stripped
@@ -2948,6 +2951,11 @@ PrefabInstance:
       propertyPath: song
       value: 
       objectReference: {fileID: 404649041}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: afterInterval
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &5886797839265283281 stripped
