@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public interface IKeyMessageTarget : IEventSystemHandler
@@ -11,6 +12,8 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     public AudioClip successImmediate;
     public AudioClip successAfter;
     public AudioClip failure;
+    public string button;
+    public Song song;
 
     SpriteRenderer m_SpriteRenderer;
     AudioSource audioSourceImmediate;
@@ -24,11 +27,20 @@ public class Key : MonoBehaviour, IKeyMessageTarget
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    void Update()
+    {
+        // TODO: Decrease lag. Consider using FixedUpdate.
+        if (!String.IsNullOrEmpty(button) && Input.GetButtonDown(button))
+        {
+            song.Hit(transform.GetSiblingIndex());
+        }
+    }
+
     public void Hit(bool correct, double timeNextHalfBeat)
     {
         if (correct)
         {
-            m_SpriteRenderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
+            m_SpriteRenderer.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             audioSourceImmediate.PlayOneShot(successImmediate);
             audioSourceAfter.PlayScheduled(timeNextHalfBeat);
             GetComponent<Animator>().SetTrigger("Bounce");

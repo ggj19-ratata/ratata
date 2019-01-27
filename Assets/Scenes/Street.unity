@@ -803,6 +803,16 @@ PrefabInstance:
       propertyPath: musician
       value: 
       objectReference: {fileID: 310444218}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: button
+      value: ButtonV
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 404649041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &504551631 stripped
@@ -1465,6 +1475,16 @@ PrefabInstance:
       propertyPath: musician
       value: 
       objectReference: {fileID: 310444218}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: button
+      value: ButtonC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 404649041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &763021792 stripped
@@ -1708,6 +1728,16 @@ PrefabInstance:
       propertyPath: musician
       value: 
       objectReference: {fileID: 310444218}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: button
+      value: ButtonX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 404649041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &967524697 stripped
@@ -2906,6 +2936,16 @@ PrefabInstance:
       propertyPath: musician
       value: 
       objectReference: {fileID: 310444218}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: button
+      value: ButtonZ
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810487486541041913, guid: b7f74cfab509bff4baf7a7738b4ff709,
+        type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 404649041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7f74cfab509bff4baf7a7738b4ff709, type: 3}
 --- !u!4 &5886797839265283281 stripped
