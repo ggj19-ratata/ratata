@@ -29,6 +29,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public int introBeats = 0;
     public AudioClip songMain;
     public AudioClip songExtra;
+    public double halfBeatDistance = 0.25;
 
     double m_timeStart;
     double m_beatInterval;
@@ -39,6 +40,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     int m_beats = 0;
     AudioSource audioSourceMain;
     AudioSource audioSourceExtra;
+    double timeNextEnable;
+    double timeNextDisable;
 
     //Ajaskript
     public Text Endtext;
@@ -57,10 +60,13 @@ public class Song : MonoBehaviour, ISongMessageTarget
         audioSourceExtra = gameObject.AddComponent<AudioSource>();
         audioSourceExtra.clip = songExtra;
         audioSourceExtra.PlayScheduled(m_timeStart);
+        audioSourceExtra.volume = 0f;
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
         keysObject.SetEnabled(introBeats == 0);
+        timeNextEnable = m_timeStart + (introBeats - 0.5) * m_beatInterval;
+        timeNextDisable = m_timeStart + (introBeats + sequenceLength - 0.5) * m_beatInterval;
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
 		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
@@ -93,12 +99,22 @@ public class Song : MonoBehaviour, ISongMessageTarget
 		//Ajaskript
         
         double time = AudioSettings.dspTime;
+        if (time >= timeNextEnable)
+        {
+            keysObject.SetEnabled(true);
+            timeNextEnable += sequenceLength * 2 * m_beatInterval;
+        }
+        if (time >= timeNextDisable)
+        {
+            keysObject.SetEnabled(false);
+            timeNextDisable += sequenceLength * 2 * m_beatInterval;
+            audioSourceExtra.volume = 0f;
+        }
         if (time >= m_timeNextBeat)
         {
             m_timeNextBeat += m_beatInterval;
             ++m_beats;
             beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
-            keysObject.SetEnabled(m_beats >= introBeats && m_beats % 8 < 4);
         }
         if (time >= m_timeNextResolution)
         {
@@ -154,8 +170,13 @@ public class Song : MonoBehaviour, ISongMessageTarget
         {
             beatResults[closestBeatIndex].misses.Add(key);
         }
-        double timeNextHalfBeat = m_timeStart + (closestBeatIndex + 0.5) * m_beatInterval;
+        double timeNextHalfBeat = m_timeStart + (closestBeatIndex + halfBeatDistance) * m_beatInterval;
         // TODO: Don't declare the beat correct if it coincides with another beat.
         ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, timeNextHalfBeat));
+    }
+
+    public void RegisterSuccess()
+    {
+        audioSourceExtra.volume = 1f;
     }
 }
