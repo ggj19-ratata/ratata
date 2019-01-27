@@ -425,6 +425,7 @@ MonoBehaviour:
   clipBeats: 544
   m_imprecisionTolerance: 0.25
   playbackDelay: 1
+  sequenceLength: 4
   Endtext: {fileID: 1037234011}
   EndScreenLength: 25
   EndScreenTime: 0
