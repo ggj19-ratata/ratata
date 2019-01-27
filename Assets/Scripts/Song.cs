@@ -26,6 +26,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public double playbackDelay = 1.0; // Allows pre-loading the clip for better synchronization
     public int sequenceLength = 4;
     public int introBeats = 0;
+    public AudioClip songMain;
+    public AudioClip songExtra;
 
     double m_timeStart;
     double m_beatInterval;
@@ -34,6 +36,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     int m_resolutions = 0;
     double m_timeNextBeat;
     int m_beats = 0;
+    AudioSource audioSourceMain;
+    AudioSource audioSourceExtra;
 
 	//Ajaskript
 	public Text Endtext;
@@ -45,7 +49,12 @@ public class Song : MonoBehaviour, ISongMessageTarget
     void Start()
     {
         m_timeStart = AudioSettings.dspTime + playbackDelay;
-        GetComponent<AudioSource>().PlayScheduled(m_timeStart);
+        audioSourceMain = gameObject.AddComponent<AudioSource>();
+        audioSourceMain.clip = songMain;
+        audioSourceMain.PlayScheduled(m_timeStart);
+        audioSourceExtra = gameObject.AddComponent<AudioSource>();
+        audioSourceExtra.clip = songExtra;
+        audioSourceExtra.PlayScheduled(m_timeStart);
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
