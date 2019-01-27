@@ -39,8 +39,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     AudioSource audioSourceMain;
     AudioSource audioSourceExtra;
 
-	//Ajaskript
-	public Text Endtext;
+    //Ajaskript
+    public Text Endtext;
 	public float EndScreenLength;
 	public float EndScreenTime;
 	public GameObject panel;
