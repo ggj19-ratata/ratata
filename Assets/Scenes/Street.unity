@@ -552,10 +552,9 @@ MonoBehaviour:
   songMain: {fileID: 8300000, guid: 2db4667fbfdc81a4a888aaf094022ff0, type: 3}
   songExtra: {fileID: 8300000, guid: 4f14622b1b24b2040b2cd786c9809edf, type: 3}
   Endtext: {fileID: 1037234011}
-  EndScreenLength: 170
+  EndScreenLength: 25
   EndScreenTime: 0
   panel: {fileID: 1265296618}
-  ChangeToSceneName: InBetweenScene
   MoneyCount: 0
 --- !u!4 &404649042
 Transform:

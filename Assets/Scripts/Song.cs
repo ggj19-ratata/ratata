@@ -47,7 +47,6 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public float EndScreenLength;
 	public float EndScreenTime;
 	public GameObject panel;
-	public string ChangeToSceneName;
 	public int MoneyCount;
 	//Ajaskript
 
@@ -84,19 +83,17 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
 			//put anything related to endgame HERE
 			panel.SetActive(true);
-			Endtext.text = "YOU WIN!*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME!";
+			Endtext.text = "YOU WIN!*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME!\n press Enter to play again";
 		}
 		else
 		{
 			Endtext.text = "";
 		}
-
-		//reload scene AT number of beats of song!!
-		//if (GetComponent<AudioSource>().isPlaying == false)
-		//{
-		//	SceneManager.LoadScene(ChangeToSceneName);
-			//panel.SetActive(false);
-		//}
+			
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 		//Ajaskript
         
         double time = AudioSettings.dspTime;
