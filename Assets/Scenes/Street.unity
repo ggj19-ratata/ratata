@@ -1230,10 +1230,10 @@ MonoBehaviour:
   intervalMin: 1
   intervalMax: 4
   times:
-  - 10
-  - 45
-  - 80
-  - 115
+  - 8
+  - 15
+  - 20
+  - 30
 --- !u!1 &725321420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5886797839293580187, guid: b7f74cfab509bff4baf7a7738b4ff709,
