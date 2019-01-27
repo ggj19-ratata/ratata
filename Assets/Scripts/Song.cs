@@ -49,6 +49,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public float EndScreenTime;
 	public GameObject panel;
 	public string ChangeToSceneName;
+	public int MoneyCount;
 	//Ajaskript
 
     void Start()
@@ -77,20 +78,21 @@ public class Song : MonoBehaviour, ISongMessageTarget
     {
 		//Ajaskript - ENDGAME
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
+			//AND MONEY COUNT >= 20
 		{
 			//for testing the scene loading:
 			//SceneManager.LoadScene(ChangeToSceneName);
 
 			//put anything related to endgame HERE
 			panel.SetActive(true);
-			Endtext.text = "YOU WIN!\n\n\n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME! \n\n\nWELL DONE!";
+			Endtext.text = "YOU WIN!*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME!";
 		}
 		else
 		{
 			Endtext.text = "";
 		}
 
-		//reload scene after song stops
+		//reload scene AT number of beats of song!!
 		//if (GetComponent<AudioSource>().isPlaying == false)
 		//{
 		//	SceneManager.LoadScene(ChangeToSceneName);

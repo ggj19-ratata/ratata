@@ -111,6 +111,7 @@ MonoBehaviour:
   musician: {fileID: 0}
   sequence: 00000000010000000200000003000000
   active: 1
+  song: {fileID: 0}
 --- !u!82 &2223186109508846772
 AudioSource:
   m_ObjectHideFlags: 0
@@ -286,15 +287,15 @@ TextMesh:
   m_GameObject: {fileID: 2223186109909994421}
   m_Text: ASKL
   m_OffsetZ: 0
-  m_CharacterSize: 1
+  m_CharacterSize: 0.2
   m_LineSpacing: 1
   m_Anchor: 7
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4279876544

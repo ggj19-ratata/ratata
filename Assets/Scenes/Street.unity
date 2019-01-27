@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.02815969, g: 0.055171855, b: 0.14607222, a: 1}
+  m_IndirectSpecularColor: {r: 0.028159596, g: 0.055171642, b: 0.14607187, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -553,9 +553,11 @@ MonoBehaviour:
   songExtra: {fileID: 8300000, guid: 4f14622b1b24b2040b2cd786c9809edf, type: 3}
   halfBeatDistance: 0.25
   Endtext: {fileID: 1037234011}
-  EndScreenLength: 25
+  EndScreenLength: 170
   EndScreenTime: 0
   panel: {fileID: 1265296618}
+  ChangeToSceneName: InBetweenScene
+  MoneyCount: 0
 --- !u!4 &404649042
 Transform:
   m_ObjectHideFlags: 0
@@ -1783,7 +1785,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -262, y: -314}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037234011
 MonoBehaviour:
@@ -1807,7 +1809,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 1fee8a18e04f200438e0a0f0d5cc62b2, type: 3}
-    m_FontSize: 50
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1818,8 +1820,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW
-    THRASH CAN HOME! \nWELL DONE!"
+  m_Text: 
 --- !u!222 &1037234012
 CanvasRenderer:
   m_ObjectHideFlags: 0
