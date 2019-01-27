@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5302461187547829263}
   - component: {fileID: 5302461187547829256}
   - component: {fileID: 3161874085590679840}
+  - component: {fileID: 91084393}
   m_Layer: 0
-  m_Name: Rat
+  m_Name: Musician
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5302461187547829257}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 0c7515f9ad116074297b593725fd92dc, type: 3}
 --- !u!23 &5302461187547829263
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -105,3 +106,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f159ddc27601e42989b5b93bb4a382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  moneyCounter: {fileID: 0}
+--- !u!95 &91084393
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5302461187547829257}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a129f8eddcb033644b965857a96063df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -29,6 +29,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public int introBeats = 0;
     public AudioClip songMain;
     public AudioClip songExtra;
+    public Musician musician;
 
     double m_timeStart;
     double m_beatInterval;
@@ -83,7 +84,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
 			//put anything related to endgame HERE
 			panel.SetActive(true);
-			Endtext.text = "YOU WIN!*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME!\n press Enter to play again";
+			Endtext.text = "YOU WIN! TODD THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME!\n press Enter to play again";
 		}
 		else
 		{
@@ -159,6 +160,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     public void Hit(int key)
     {
+        musician.GetComponentInChildren<Animator>().SetTrigger("Hit");
+
         double timeSinceStart = AudioSettings.dspTime - m_timeStart;
         int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
         double closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
