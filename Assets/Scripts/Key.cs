@@ -18,6 +18,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     SpriteRenderer m_SpriteRenderer;
     AudioSource audioSourceImmediate;
     AudioSource audioSourceAfter;
+    bool keyEnabled;
     
     void Start()
     {
@@ -30,7 +31,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     void Update()
     {
         // TODO: Decrease lag. Consider using FixedUpdate.
-        if (!String.IsNullOrEmpty(button) && Input.GetButtonDown(button))
+        if (keyEnabled && !String.IsNullOrEmpty(button) && Input.GetButtonDown(button))
         {
             song.Hit(transform.GetSiblingIndex());
         }
@@ -53,6 +54,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
 
     public void SetEnabled(bool active)
     {
+        keyEnabled = active;
         var color = m_SpriteRenderer.color;
         if (active)
         {

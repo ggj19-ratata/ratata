@@ -38,6 +38,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
     int m_beats = 0;
     AudioSource audioSourceMain;
     AudioSource audioSourceExtra;
+    double timeNextEnable;
+    double timeNextDisable;
 
     //Ajaskript
     public Text Endtext;
@@ -59,6 +61,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
         keysObject.SetEnabled(introBeats == 0);
+        timeNextEnable = m_timeStart + (introBeats - 0.5) * m_beatInterval;
+        timeNextDisable = m_timeStart + (introBeats + sequenceLength - 0.5) * m_beatInterval;
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
 		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
@@ -82,12 +86,21 @@ public class Song : MonoBehaviour, ISongMessageTarget
 		//Ajaskript
         
         double time = AudioSettings.dspTime;
+        if (time >= timeNextEnable)
+        {
+            keysObject.SetEnabled(true);
+            timeNextEnable += sequenceLength * 2 * m_beatInterval;
+        }
+        if (time >= timeNextDisable)
+        {
+            keysObject.SetEnabled(false);
+            timeNextDisable += sequenceLength * 2 * m_beatInterval;
+        }
         if (time >= m_timeNextBeat)
         {
             m_timeNextBeat += m_beatInterval;
             ++m_beats;
             beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
-            keysObject.SetEnabled(m_beats >= introBeats && m_beats % 8 < 4);
         }
         if (time >= m_timeNextResolution)
         {
