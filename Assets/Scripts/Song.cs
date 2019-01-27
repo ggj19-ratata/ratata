@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,9 +12,10 @@ public interface ISongMessageTarget : IEventSystemHandler
 public class Song : MonoBehaviour, ISongMessageTarget
 {
     public GameObject[] keys;
-    public GameObject wall;
+    public GameObject beatCounter;
     public int clipBeats;
     public double m_imprecisionTolerance = 0.25;
+    public double playbackDelay = 1.0; // Allows pre-loading the clip for better synchronization
 
     double m_timeStart;
     double m_beatInterval;
@@ -29,45 +29,44 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public Text Endtext;
 	public float EndScreenLength;
 	public float EndScreenTime;
+	public GameObject panel;
 	//Ajaskript
 
     void Start()
     {
-        GetComponent<AudioSource>().Play();
-        m_timeStart = AudioSettings.dspTime;
+        m_timeStart = AudioSettings.dspTime + playbackDelay;
+        GetComponent<AudioSource>().PlayScheduled(m_timeStart);
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
-		//EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
+		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
 		//Ajaskript
     }
     
     void Update()
     {
 		//Ajaskript - ENDGAME
-		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
-		Debug.Log(EndScreenTime);
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
 		{
-				//put anything related to endgame HERE
-			Endtext.text = "you win";
+			//put anything related to endgame HERE
+			panel.SetActive(true);
+			Endtext.text = "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW THRASH CAN HOME! \nWELL DONE!";
 		}
 		else
 		{
-			Endtext.text = "playing";
-			}
+			Endtext.text = "";
+		}
+
 		//Ajaskript
-
-
-
+        
         double time = AudioSettings.dspTime;
         if (time >= m_timeNextBeat)
         {
-            m_timeNextBeat = m_timeNextBeat + m_beatInterval;
+            m_timeNextBeat += m_beatInterval;
             ++m_beats;
-            wall.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
+            beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
         }
         if (time >= m_timeNextResolution)
         {
