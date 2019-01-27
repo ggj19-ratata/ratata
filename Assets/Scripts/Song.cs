@@ -131,6 +131,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
             beatResults[closestBeatIndex].misses.Add(key);
         }
         double timeNextHalfBeat = m_timeStart + (closestBeatIndex + 0.5) * m_beatInterval;
+        // TODO: Don't declare the beat correct if it coincides with another beat.
         ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, timeNextHalfBeat));
     }
 }
