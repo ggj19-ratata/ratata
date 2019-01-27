@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public interface ISongMessageTarget : IEventSystemHandler
 {
@@ -44,6 +45,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public float EndScreenLength;
 	public float EndScreenTime;
 	public GameObject panel;
+	public string ChangeToSceneName;
 	//Ajaskript
 
     void Start()
@@ -70,15 +72,24 @@ public class Song : MonoBehaviour, ISongMessageTarget
 		//Ajaskript - ENDGAME
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
 		{
+			//for testing the scene loading:
+			//SceneManager.LoadScene(ChangeToSceneName);
+
 			//put anything related to endgame HERE
 			panel.SetActive(true);
-			Endtext.text = "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW THRASH CAN HOME! \nWELL DONE!";
+			Endtext.text = "YOU WIN!\n\n\n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY \nTO BUY HIMSELF A NEW THRASH CAN HOME! \n\n\nWELL DONE!";
 		}
 		else
 		{
 			Endtext.text = "";
 		}
 
+		//reload scene after song stops
+		//if (GetComponent<AudioSource>().isPlaying == false)
+		//{
+		//	SceneManager.LoadScene(ChangeToSceneName);
+			//panel.SetActive(false);
+		//}
 		//Ajaskript
         
         double time = AudioSettings.dspTime;
