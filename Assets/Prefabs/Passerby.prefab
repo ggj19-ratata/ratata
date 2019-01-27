@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2223186109508848462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2223186109909994422}
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2223186109508848462}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 0c7515f9ad116074297b593725fd92dc, type: 3}
 --- !u!23 &2223186109508846768
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111,7 +111,6 @@ MonoBehaviour:
   musician: {fileID: 0}
   sequence: 00000000010000000200000003000000
   active: 1
-  song: {fileID: 0}
 --- !u!82 &2223186109508846772
 AudioSource:
   m_ObjectHideFlags: 0
