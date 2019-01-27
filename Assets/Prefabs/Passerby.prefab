@@ -111,7 +111,6 @@ MonoBehaviour:
   musician: {fileID: 0}
   sequence: 00000000010000000200000003000000
   active: 1
-  song: {fileID: 0}
 --- !u!82 &2223186109508846772
 AudioSource:
   m_ObjectHideFlags: 0
