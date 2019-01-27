@@ -12,15 +12,23 @@ public interface ISongMessageTarget : IEventSystemHandler
 
 public class Song : MonoBehaviour, ISongMessageTarget
 {
+    private class BeatResult
+    {
+        public HashSet<int> hits = new HashSet<int>();
+        public HashSet<int> misses = new HashSet<int>();
+    }
+
     public GameObject[] keys;
-    public GameObject wall;
+    public GameObject beatCounter;
     public int clipBeats;
     public double m_imprecisionTolerance = 0.25;
+    public double playbackDelay = 1.0; // Allows pre-loading the clip for better synchronization
+    public int sequenceLength = 4;
 
     double m_timeStart;
     double m_beatInterval;
     double m_timeNextResolution;
-    List<int> m_beatKeys = new List<int>(new int[] { -1, -1, -1, -1 });
+    Dictionary<int, BeatResult> beatResults = new Dictionary<int, BeatResult>();
     int m_resolutions = 0;
     double m_timeNextBeat;
     int m_beats = 0;
@@ -29,61 +37,76 @@ public class Song : MonoBehaviour, ISongMessageTarget
 	public Text Endtext;
 	public float EndScreenLength;
 	public float EndScreenTime;
+	public GameObject panel;
 	//Ajaskript
 
     void Start()
     {
-        GetComponent<AudioSource>().Play();
-        m_timeStart = AudioSettings.dspTime;
+        m_timeStart = AudioSettings.dspTime + playbackDelay;
+        GetComponent<AudioSource>().PlayScheduled(m_timeStart);
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
-        m_timeNextResolution = m_timeStart + (m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
+        m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
-		//EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
+		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
 		//Ajaskript
     }
     
     void Update()
     {
 		//Ajaskript - ENDGAME
-		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
-		Debug.Log(EndScreenTime);
 		if (GetComponent<AudioSource>().time >= EndScreenTime)
 		{
-				//put anything related to endgame HERE
-			Endtext.text = "you win";
+			//put anything related to endgame HERE
+			panel.SetActive(true);
+			Endtext.text = "YOU WIN! \n*NAME* THE RAT HAS COLLECTED ENOUGH MONEY TO BUY HIMSELF A NEW THRASH CAN HOME! \nWELL DONE!";
 		}
 		else
 		{
-			Endtext.text = "playing";
-			}
+			Endtext.text = "";
+		}
+
 		//Ajaskript
-
-
-
+        
         double time = AudioSettings.dspTime;
         if (time >= m_timeNextBeat)
         {
-            m_timeNextBeat = m_timeNextBeat + m_beatInterval;
+            m_timeNextBeat += m_beatInterval;
             ++m_beats;
-            wall.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
+            beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
         }
         if (time >= m_timeNextResolution)
         {
-            ++m_resolutions;
-            m_timeNextResolution = m_timeStart + (m_resolutions * m_beatKeys.Count + m_imprecisionTolerance) * m_beatInterval;
-            Debug.Log(string.Format("{0} {1} {2} {3}", m_beatKeys[0], m_beatKeys[1], m_beatKeys[2], m_beatKeys[3]));
-
+            List<int> sequence = new List<int>();
+            for (int i = 0; i < sequenceLength; ++i)
+            {
+                int beatIndex = m_beats - sequenceLength + i;
+                int seqElem = -1;
+                if (beatResults.ContainsKey(beatIndex))
+                {
+                    var beatResult = beatResults[beatIndex];
+                    if (beatResult.misses.Count > 0 || beatResult.hits.Count > 1)
+                    {
+                        seqElem = -2;
+                        continue;
+                    }
+                    if (beatResult.hits.Count == 1)
+                    {
+                        seqElem = beatResult.hits.First();
+                    }
+                    beatResults.Remove(beatIndex);
+                }
+                sequence.Add(seqElem);
+            }
+            Debug.Log(String.Join(" ", sequence));
             foreach (GameObject passerby in GameObject.FindGameObjectsWithTag("Passerby"))
             {
-                ExecuteEvents.Execute<IPasserbyMessageTarget>(passerby, null, (x, y) => x.TrySequence(m_beatKeys));
+                ExecuteEvents.Execute<IPasserbyMessageTarget>(passerby, null, (x, y) => x.TrySequence(sequence));
             }
 
-            m_beatKeys[0] = -1;
-            m_beatKeys[1] = -1;
-            m_beatKeys[2] = -1;
-            m_beatKeys[3] = -1;
+            ++m_resolutions;
+            m_timeNextResolution = m_timeStart + ((m_resolutions+1) * sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         }
     }
 
@@ -95,20 +118,20 @@ public class Song : MonoBehaviour, ISongMessageTarget
         double timeFromClosestBeat = timeSinceStart - closestBeatTimeSinceStart;
         double imprecisionRatio = timeFromClosestBeat / m_beatInterval;
         bool correct = Math.Abs(imprecisionRatio) <= m_imprecisionTolerance;
+        if (!beatResults.ContainsKey(closestBeatIndex))
+        {
+            beatResults[closestBeatIndex] = new BeatResult();
+        }
         if (correct)
         {
-            int beatIndexInSequence = closestBeatIndex % m_beatKeys.Count;
-            if (m_beatKeys[beatIndexInSequence] == -1)
-            {
-                m_beatKeys[beatIndexInSequence] = key;
-            }
-            else
-            {
-                m_beatKeys[beatIndexInSequence] = -2;
-                correct = false;
-            }
+            beatResults[closestBeatIndex].hits.Add(key);
+        }
+        else
+        {
+            beatResults[closestBeatIndex].misses.Add(key);
         }
         double timeNextHalfBeat = m_timeStart + (closestBeatIndex + 0.5) * m_beatInterval;
+        // TODO: Don't declare the beat correct if it coincides with another beat.
         ExecuteEvents.Execute<IKeyMessageTarget>(keys[key], null, (x, y) => x.Hit(correct, timeNextHalfBeat));
     }
 }
