@@ -31,7 +31,7 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
             GetComponent<AudioSource>().Play();
             musician.AddScore(1);
             active = false;
-            banner.GetComponent<TextMesh>().text = "-";
+            banner.GetComponent<TextMesh>().text = "";
             success = true;
         }
     }
