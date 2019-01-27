@@ -9,6 +9,7 @@ public class PasserbySpawner : MonoBehaviour
     public float radius = 1f;
     public float intervalMin = 1f;
     public float intervalMax = 4f;
+    public Song song;
 
     static int[][] sequences = {
         new int[] { 0, 1, 0, 1 }, // blue
@@ -33,6 +34,7 @@ public class PasserbySpawner : MonoBehaviour
             Vector3 pos = transform.position + new Vector3(planarPos.x, 1, planarPos.y);
             Passerby passerby = Instantiate(passerbyPrefab, pos, Quaternion.identity);
             passerby.musician = musician;
+            passerby.song = song;
             passerby.SetSequence(new List<int>(sequences[Math.Min((int)UnityEngine.Random.Range(0, sequences.Length), sequences.Length - 1)]));
         }
     }

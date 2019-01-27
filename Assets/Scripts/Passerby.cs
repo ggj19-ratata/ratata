@@ -15,6 +15,7 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
     public Musician musician;
     public List<int> sequence;
     public bool active = true;
+    public Song song;
 
     static char[] keyChars = { 'A', 'S', 'K', 'L' };
 
@@ -31,6 +32,7 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
             musician.AddScore(1);
             active = false;
             banner.GetComponent<TextMesh>().text = "-";
+            song.RegisterSuccess();
         }
     }
 
