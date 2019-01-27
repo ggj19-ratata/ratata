@@ -2773,36 +2773,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
-      propertyPath: buttons.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: song
-      value: 
-      objectReference: {fileID: 404649039}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: buttons.Array.data[0]
-      value: ButtonZ
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: buttons.Array.data[1]
-      value: ButtonX
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: buttons.Array.data[2]
-      value: ButtonC
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: buttons.Array.data[3]
-      value: ButtonV
-      objectReference: {fileID: 0}
-    - target: {fileID: 3161874085590679840, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
       propertyPath: moneyCounter
       value: 
       objectReference: {fileID: 948346689}
@@ -2820,6 +2790,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
         type: 3}
@@ -2841,21 +2831,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5302461187547829261, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5302461187547829262, guid: 006001e5841a96f478be9c07dcd8a486,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: 0c7515f9ad116074297b593725fd92dc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 006001e5841a96f478be9c07dcd8a486, type: 3}
 --- !u!1001 &5886797839265283280
