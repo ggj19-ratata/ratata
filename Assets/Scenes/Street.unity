@@ -422,7 +422,7 @@ MonoBehaviour:
   - {fileID: 421948299}
   - {fileID: 94927013}
   beatCounter: {fileID: 190805305}
-  clipBeats: 544
+  clipBeats: 416
   m_imprecisionTolerance: 0.25
   playbackDelay: 1
   sequenceLength: 4
