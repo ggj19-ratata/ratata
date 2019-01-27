@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public interface IPasserbyMessageTarget : IEventSystemHandler
 {
-    void TrySequence(List<int> playedSequence);
+    void TrySequence(List<int> playedSequence, out bool success);
 }
 
 public class Passerby : MonoBehaviour, IPasserbyMessageTarget
@@ -15,7 +15,6 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
     public Musician musician;
     public List<int> sequence;
     public bool active = true;
-    public Song song;
 
     static char[] keyChars = { 'A', 'S', 'K', 'L' };
 
@@ -24,15 +23,16 @@ public class Passerby : MonoBehaviour, IPasserbyMessageTarget
         UpdateSequence();
     }
 
-    public void TrySequence(List<int> playedSequence)
+    public void TrySequence(List<int> playedSequence, out bool success)
     {
+        success = false;
         if (active && playedSequence.SequenceEqual(sequence))
         {
             GetComponent<AudioSource>().Play();
             musician.AddScore(1);
             active = false;
             banner.GetComponent<TextMesh>().text = "-";
-            song.RegisterSuccess();
+            success = true;
         }
     }
 

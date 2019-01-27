@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public interface IKeyMessageTarget : IEventSystemHandler
 {
-    void Hit(bool correct, double timeNextHalfBeat);
+    void Hit(bool correct, double beatTime, double beatDuration);
 }
 
 public class Key : MonoBehaviour, IKeyMessageTarget
@@ -14,8 +14,8 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     public AudioClip failure;
     public string button;
     public Song song;
+    public double afterInterval = 0.25; // in beats
 
-    SpriteRenderer m_SpriteRenderer;
     AudioSource audioSourceImmediate;
     AudioSource audioSourceAfter;
     bool keyEnabled;
@@ -25,7 +25,6 @@ public class Key : MonoBehaviour, IKeyMessageTarget
         audioSourceImmediate = gameObject.AddComponent<AudioSource>();
         audioSourceAfter = gameObject.AddComponent<AudioSource>();
         audioSourceAfter.clip = successAfter;
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -37,13 +36,13 @@ public class Key : MonoBehaviour, IKeyMessageTarget
         }
     }
 
-    public void Hit(bool correct, double timeNextHalfBeat)
+    public void Hit(bool correct, double beatTime, double beatDuration)
     {
         if (correct)
         {
-            m_SpriteRenderer.color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
+            GetComponent<SpriteRenderer>().color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 1f, 1f);
             audioSourceImmediate.PlayOneShot(successImmediate);
-            audioSourceAfter.PlayScheduled(timeNextHalfBeat);
+            audioSourceAfter.PlayScheduled(beatTime + afterInterval * beatDuration);
             GetComponent<Animator>().SetTrigger("Bounce");
         }
         else
@@ -55,7 +54,7 @@ public class Key : MonoBehaviour, IKeyMessageTarget
     public void SetEnabled(bool active)
     {
         keyEnabled = active;
-        var color = m_SpriteRenderer.color;
+        var color = GetComponent<SpriteRenderer>().color;
         if (active)
         {
             color.a = 1f;
@@ -64,6 +63,6 @@ public class Key : MonoBehaviour, IKeyMessageTarget
         {
             color.a = 0.25f;
         }
-        m_SpriteRenderer.color = color;
+        GetComponent<SpriteRenderer>().color = color;
     }
 }
