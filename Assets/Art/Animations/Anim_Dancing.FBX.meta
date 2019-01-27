@@ -1,0 +1,188 @@
+fileFormatVersion: 2
+guid: 40b49617cd890054194e63e3a6218418
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bone002(mirrored)001
+    100004: Bone007(mirrored)001
+    100006: Bone008(mirrored)001
+    100008: Bone009(mirrored)001
+    100010: Bone010(mirrored)001
+    100012: Bone012(mirrored)001
+    100014: Bone013(mirrored)001
+    100016: Bone014(mirrored)001
+    100018: Bone015(mirrored)001
+    100020: Bone016(mirrored)001
+    100022: Bone017(mirrored)001
+    100024: Bone018(mirrored)001
+    100026: Bone019(mirrored)001
+    100028: Bone020(mirrored)001
+    100030: Bone021(mirrored)001
+    100032: Bone022(mirrored)001
+    100034: Bone023
+    100036: Bone024
+    100038: Bone025
+    100040: Bone026
+    100042: Bone027
+    100044: Bone028
+    100046: Bone029
+    100048: Bone030
+    100050: Bone031
+    100052: Bone032
+    100054: Bone033
+    100056: Bone034
+    100058: Bone035
+    100060: Bone036
+    100062: Bone037
+    100064: Bone038
+    100066: Bone039
+    100068: Bone040
+    100070: Bone041
+    100072: Bone042
+    100074: Bone043
+    100076: Bone044
+    100078: Circle002
+    100080: Dummy020
+    100082: Dummy022
+    100084: Dummy025
+    100086: Dummy038
+    100088: Hlava001
+    100090: Me_Char_Rat01_002
+    400000: //RootNode
+    400002: Bone002(mirrored)001
+    400004: Bone007(mirrored)001
+    400006: Bone008(mirrored)001
+    400008: Bone009(mirrored)001
+    400010: Bone010(mirrored)001
+    400012: Bone012(mirrored)001
+    400014: Bone013(mirrored)001
+    400016: Bone014(mirrored)001
+    400018: Bone015(mirrored)001
+    400020: Bone016(mirrored)001
+    400022: Bone017(mirrored)001
+    400024: Bone018(mirrored)001
+    400026: Bone019(mirrored)001
+    400028: Bone020(mirrored)001
+    400030: Bone021(mirrored)001
+    400032: Bone022(mirrored)001
+    400034: Bone023
+    400036: Bone024
+    400038: Bone025
+    400040: Bone026
+    400042: Bone027
+    400044: Bone028
+    400046: Bone029
+    400048: Bone030
+    400050: Bone031
+    400052: Bone032
+    400054: Bone033
+    400056: Bone034
+    400058: Bone035
+    400060: Bone036
+    400062: Bone037
+    400064: Bone038
+    400066: Bone039
+    400068: Bone040
+    400070: Bone041
+    400072: Bone042
+    400074: Bone043
+    400076: Bone044
+    400078: Circle002
+    400080: Dummy020
+    400082: Dummy022
+    400084: Dummy025
+    400086: Dummy038
+    400088: Hlava001
+    400090: Me_Char_Rat01_002
+    2100000: 'Material #3'
+    4300000: Me_Char_Rat01_002
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Me_Char_Rat01_002
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
