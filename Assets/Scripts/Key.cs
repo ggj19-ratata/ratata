@@ -38,4 +38,18 @@ public class Key : MonoBehaviour, IKeyMessageTarget
             audioSourceImmediate.PlayOneShot(failure);
         }
     }
+
+    public void SetEnabled(bool active)
+    {
+        var color = m_SpriteRenderer.color;
+        if (active)
+        {
+            color.a = 1f;
+        }
+        else
+        {
+            color.a = 0.25f;
+        }
+        m_SpriteRenderer.color = color;
+    }
 }

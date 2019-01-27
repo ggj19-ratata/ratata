@@ -18,12 +18,14 @@ public class Song : MonoBehaviour, ISongMessageTarget
         public HashSet<int> misses = new HashSet<int>();
     }
 
+    public Keys keysObject;
     public GameObject[] keys;
     public GameObject beatCounter;
     public int clipBeats;
     public double m_imprecisionTolerance = 0.25;
     public double playbackDelay = 1.0; // Allows pre-loading the clip for better synchronization
     public int sequenceLength = 4;
+    public int introBeats = 0;
 
     double m_timeStart;
     double m_beatInterval;
@@ -47,6 +49,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
         m_beatInterval = GetComponent<AudioSource>().clip.length / clipBeats;
         m_timeNextResolution = m_timeStart + (sequenceLength + m_imprecisionTolerance) * m_beatInterval;
         m_timeNextBeat = m_timeStart + m_beatInterval;
+        keysObject.SetEnabled(introBeats == 0);
 
 		//Ajaskript, cas objeveni endscreen = delka klipu  - doba trvani outra 
 		EndScreenTime = GetComponent<AudioSource>().clip.length - EndScreenLength;
@@ -75,6 +78,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
             m_timeNextBeat += m_beatInterval;
             ++m_beats;
             beatCounter.GetComponent<TextMesh>().text = (m_beats % 4 + 1).ToString();
+            keysObject.SetEnabled(m_beats >= introBeats && m_beats % 8 < 4);
         }
         if (time >= m_timeNextResolution)
         {
