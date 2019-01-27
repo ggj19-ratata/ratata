@@ -29,6 +29,7 @@ public class Song : MonoBehaviour, ISongMessageTarget
     public int introBeats = 0;
     public AudioClip songMain;
     public AudioClip songExtra;
+    public Musician musician;
 
     double m_timeStart;
     double m_beatInterval;
@@ -159,6 +160,8 @@ public class Song : MonoBehaviour, ISongMessageTarget
 
     public void Hit(int key)
     {
+        musician.GetComponentInChildren<Animator>().SetTrigger("Hit");
+
         double timeSinceStart = AudioSettings.dspTime - m_timeStart;
         int closestBeatIndex = (int)(timeSinceStart / m_beatInterval + 0.5);
         double closestBeatTimeSinceStart = m_beatInterval * closestBeatIndex;
