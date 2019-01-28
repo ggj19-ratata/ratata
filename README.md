@@ -7,6 +7,8 @@ Game jam theme: [What home means to you](https://globalgamejam.org/news/theme-gl
 
 Final game jam version: [ggj19-final](https://github.com/ggj19-ratata/ratata/releases/tag/ggj19-final)
 
+Created in [Unity](https://unity3d.com/) 2018.3.3f1.
+
 ## Game web pages
 
 * [Global Game Jam](https://globalgamejam.org/2019/games/ratata)
